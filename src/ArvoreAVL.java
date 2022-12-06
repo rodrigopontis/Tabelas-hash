@@ -12,6 +12,7 @@ public class ArvoreAVL<Tipo> {
         System.out.println("Árvore iniciada");
     }
 
+    //---------------------------------# ##INSERCAO## #----------------------------------
     public void inserir(int chave, Tipo k) {
         NoAVL novoNo = new NoAVL(chave, k);
         inserirAVL(this.raiz, novoNo);
@@ -43,24 +44,11 @@ public class ArvoreAVL<Tipo> {
                 }
 
             } else {
-                // O nó já existe
+                // O nó já existe e nao faz nada
             }
         }
     }
-
-    public Tipo BuscaAVL( int codigo, NoAVL<Tipo> comparar ){
-        if ( codigo == comparar.getChave() ){
-            return comparar.getElemento();
-        }
-        else if(codigo < comparar.getChave() ){
-            BuscaAVL(codigo, comparar.getEsquerda());
-        }
-        else if (codigo > comparar.getChave() ){
-            BuscaAVL(codigo, comparar.getDireita());
-        }
-        return null;
-    }
-
+    //---------------------------------# ##BALANCEAMENTO## #----------------------------------
     private void verificarBalanceamento(NoAVL atual) {
         setBalanceamento(atual);
         int balanceamento = atual.getAltura();
@@ -90,7 +78,24 @@ public class ArvoreAVL<Tipo> {
             this.raiz = atual;
         }
     }
+    private void setBalanceamento(NoAVL no) {
+        no.setAltura(altura(no.getDireita()) - altura(no.getEsquerda()));
+    }
+    //----------------------------------# ##BUSCA## #--------------------------------
+    public Tipo BuscaAVL( int codigo, NoAVL<Tipo> comparar ){
+        if ( codigo == comparar.getChave() ){
+            return comparar.getElemento();
+        }
+        else if(codigo < comparar.getChave() ){
+            BuscaAVL(codigo, comparar.getEsquerda());
+        }
+        else if (codigo > comparar.getChave() ){
+            BuscaAVL(codigo, comparar.getDireita());
+        }
+        return null;
+    }
 
+    //----------------------------------# ##ROTACOES## #--------------------------------
     private NoAVL rotacaoEsquerda(NoAVL inicial) {
         //Rotacao
         NoAVL direita = inicial.getDireita();
@@ -181,13 +186,11 @@ public class ArvoreAVL<Tipo> {
         }
     }
 
-    private void setBalanceamento(NoAVL no) {
-        no.setAltura(altura(no.getDireita()) - altura(no.getEsquerda()));
-    }
+
 
     //print stuffs
     public String toString() {              // Sobrescreve o metodo toString
-        String out = "Raiz->";                    // Cria uma string vazia para retorno
+        String out = "Raiz->";              // Cria uma string vazia para retorno
         NoAVL no = raiz;
         out += prefixado(no);
 
@@ -212,5 +215,6 @@ public class ArvoreAVL<Tipo> {
     public NoAVL<Tipo> getRaiz(){
         return this.raiz;
     }
+
 
 }

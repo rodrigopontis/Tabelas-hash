@@ -5,12 +5,13 @@ public class NoRB<Tipo> {
     private Tipo elemento; //valor
     private int chave;  //chave busca
 
-    //Construtor -----
+    //----------------Construtor ------------
 
-    public NoRB(){
+    public NoRB(int chave, Tipo elemento){
         this.chave = chave;
         this.elemento = elemento;
-        this.cor = Cor.preto;
+        this.cor = Cor.red;
+
         this.esquerda = null;
         this.direita = null;
     }
@@ -59,6 +60,10 @@ public class NoRB<Tipo> {
         this.pai = pai;
         return pai;
     }
+
+    public Cor getCor(){ return this.cor; }
+
+    public void setCor(Cor cor){ this.cor = cor; }
 
 }
 

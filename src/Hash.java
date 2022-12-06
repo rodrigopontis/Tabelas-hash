@@ -31,6 +31,8 @@ public class Hash<Tipo> {
         for ( int i = 0; i < operador; i++) arvoreAVL[i] = new ArvoreAVL<Tipo>();
 
         arvoreRB = new ArvoreRB[operador];
+        for ( int i = 0; i < operador; i++) arvoreRB[i] = new ArvoreRB<Tipo>();
+
     }
 
     Hash(Tipo valor){
@@ -95,7 +97,7 @@ public class Hash<Tipo> {
         }
         return perdido;
     }
-
+    //--------------------------------# ## Arvore AVL### #--------------------------------
     public void InserirArvoreAVL(int codigo, Tipo novo){
         arvoreAVL[ codigo%operador ].inserir(codigo,novo);
     }
@@ -104,6 +106,37 @@ public class Hash<Tipo> {
         NoAVL<Tipo> raiz = arvoreAVL[codigo%operador].getRaiz();
         return arvoreAVL[codigo%operador].BuscaAVL( codigo, raiz );
     }
+    void InserirValorArvoreAVL(Tipo valor){
+        //Criando arvoreAVL para inserir
+        ArvoreAVL<Tipo> arvoreAVL = new ArvoreAVL<Tipo>();
+
+        //Valor do tipo aluno que sera inserido na arvoreAVL
+        Aluno aluno = (Aluno) valor;
+
+        arvoreAVL.inserir(aluno.getMatricula(), valor);
+    }
+    //--------------------------------# ## Arvore RBN### #--------------------------------
+    public void InserirArvoreRB(int codigo, Tipo novo){
+        arvoreRB[ codigo%operador ].inserir2(codigo,novo);
+    }
+
+    Tipo BuscaArvoreRB(int codigo){
+        NoRB<Tipo> raiz = arvoreRB[codigo%operador].getRaiz();
+        return arvoreRB[codigo%operador].BuscaRB( codigo, raiz );
+
+    }
+
+    void InserirValorArvoreRB(Tipo valor){
+        //Criando arvoreAVL para inserir2
+        ArvoreRB<Tipo> arvoreRB = new ArvoreRB<Tipo>();
+
+        //Valor do tipo aluno que sera inserido na arvoreAVL
+        Aluno aluno = (Aluno) valor;
+
+        arvoreRB.inserir2(aluno.getMatricula(), valor);
+    }
+
+    //--------------------------------------------------------------------------------------
 
     Tipo BuscarListaEncadeada(int codigo){
         return (Tipo)lista[codigo % this.operador].buscar(codigo);
@@ -127,17 +160,6 @@ public class Hash<Tipo> {
         int chave = aluno.getMatricula() % this.operador;
         lista[chave].inserir((Tipo)aluno);
     }
-
-    void InserirValorArvoreAVL(Tipo valor){
-        //Criando arvoreAVL para inserir
-        ArvoreAVL<Tipo> arvoreAVL = new ArvoreAVL<Tipo>();
-
-        //Valor do tipo aluno que sera inserido na arvoreAVL
-        Aluno aluno = (Aluno) valor;
-
-        arvoreAVL.inserir(aluno.getMatricula(), valor);
-    }
-
 
     public int getMatricula(Aluno aluno) {return aluno.getMatricula();}
 
